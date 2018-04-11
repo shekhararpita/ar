@@ -39,5 +39,13 @@ function errorMsg(msg, error) {
   }
 }
 
-navigator.mediaDevices.getUserMedia(constraints).
-    then(handleSuccess).catch(handleError);
+//navigator.mediaDevices.getUserMedia(constraints).
+    //then(handleSuccess).catch(handleError);
+
+navigator.mediaDevices.getUserMedia({video:true}).then(function(stream){
+		vid.onloadedmetadata = function(){
+   			this.width = overlay.width = this.videoWidth;
+    			this.height = overlay.height = this.videoHeight;
+   		}
+  		vid.src = URL.createObjectURL(stream);
+  		vid.play();
